@@ -20,7 +20,7 @@ body {
 
 /* Header Styles */
 header {
-    background-color: #34495e
+    background-color: #34495e;
     color: white;
     padding: 20px;
     text-align: center;
@@ -78,7 +78,7 @@ nav a:hover {
 
 /* Fixed Footer Styling */
 .fixed-footer {
-    background-color: #333;
+    background-color: #000000;
     color: white;
     text-align: center;
     padding: 15px 20px;

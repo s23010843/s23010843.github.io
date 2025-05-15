@@ -1,8 +1,8 @@
 title: "Homepage"
 description: "Bookmark this page to stay informed about the latest updates and developments on my projects."
-baseurl: "/"  # This should be '/' if hosting at the root of the domain
+baseurl: "/"
 url: "https://s23010843.github.io"
-theme: "jekyll-theme-minimal"
+#theme: "jekyll-theme-minimal"
 author: "s23010843"
 markdown: kramdown
 
@@ -17,8 +17,8 @@ paginate: 10
 social_links:
   - icon: "github"
     url: "https://github.com/s23010843"
-  - icon: "twitter"
-    url: "https://twitter.com/<username>"
+#  - icon: "twitter"
+#    url: "https://twitter.com/<username>"
 
 # Exclude files from being included in the build (optional)
 exclude:
