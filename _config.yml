@@ -1,16 +1,16 @@
 title: "Homepage"
 description: "Bookmark this page to stay informed about the latest updates and developments on my projects."
-baseurl: "/"
+baseurl: "/"  # This should be '/' if hosting at the root of the domain
 url: "https://s23010843.github.io"
 theme: "jekyll-theme-minimal"
-author: "S23010843"
+author: "s23010843"
 markdown: kramdown
 
 # Add favicon link
 favicon: "/universal/favicons/favicon.ico"
 
 # Build settings
-permalink: /:title/
+permalink: /:title/  # This may change depending on your URL structure
 paginate: 10
 
 # Social Links (optional)
