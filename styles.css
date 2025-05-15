@@ -1,0 +1,113 @@
+/* Global Styles */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+}
+
+header p {
+    margin: 10px 0 20px;
+    font-size: 18px;
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+nav a {
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Main Content Section */
+.content {
+    text-align: center;
+    padding: 40px 20px;
+    flex-grow: 1;
+}
+
+.content h2 {
+    font-size: 28px;
+    color: #333;
+}
+
+.content p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Fixed Footer Styling */
+.fixed-footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.fixed-footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+    .content h2 {
+        font-size: 24px;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+}
