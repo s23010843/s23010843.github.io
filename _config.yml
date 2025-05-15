@@ -1,3 +1,26 @@
-theme: jekyll-theme-minimal
-title: s23010843's homepage
-description: Bookmark this to keep an eye on my project updates!
+title: "Homepage"
+description: "Bookmark this page to stay informed about the latest updates and developments on my projects."
+baseurl: "/"
+url: "https://s23010843.github.io"
+theme: "jekyll-theme-minimal"
+author: "s23010843"
+markdown: kramdown
+
+# Build settings
+permalink: /:title/
+paginate: 10
+
+# Social Links (optional)
+social_links:
+  - icon: "github"
+    url: "https://github.com/s23010843"
+  - icon: "twitter"
+    url: "https://twitter.com/<username>"
+
+# Exclude files from being included in the build (optional)
+exclude:
+  - README.md
+  - LICENSE
+
+# Google Analytics (optional, replace with your actual tracking ID)
+# google_analytics: "UA-XXXXX-X"
