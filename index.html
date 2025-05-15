@@ -1,21 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ site.description }}">
-  <title>{{ site.title }}</title>
-  <link rel="icon" href="{{ site.baseurl }}/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/style.css"> <!-- Optional custom CSS -->
-</head>
-<body>
-  <header>
-    <h1>Welcome to {{ site.title }}</h1>
-    <p>{{ site.description }}</p>
-  </header>
 
-  <footer>
-    <p>&copy; {{ site.author }} | All Rights Reserved</p>
-  </footer>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bookmark this page to stay informed about the latest updates and developments on my projects.">
+    <meta name="author" content="s23010843">
+    <title>Home | Official</title>
+    <link rel="icon" href="/universal/favicons/favicon.ico" type="image/x-icon">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to our Homepage</h1>
+        <p>Bookmark this page to stay informed about the latest updates and developments on my projects.</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+    </nav>
+
+    <!-- Main Content Section -->
+    <main class="content">
+        <h2>Welcome to our Website!</h2>
+        <p>Stay updated on the latest developments and projects by bookmarking this page. You can navigate through different sections using the menu above.</p>
+    </main>
+
+    <!-- Footer Section (Fixed) -->
+    <footer class="fixed-footer">
+        <p>&copy; <span id="current-year"></span> Home | All Rights Reserved</p>
+    </footer>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
 </body>
+
 </html>
