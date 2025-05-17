@@ -59,8 +59,8 @@ nav a:hover {
 }
 
 a:visited {
-    color: purple;
-    /* After clicking */
+    color: wheat;
+    /* After clicking --> color: purple; */
 }
 
 a:active {
