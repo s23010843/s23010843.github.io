@@ -58,6 +58,20 @@ nav a:hover {
     color: black;
 }
 
+a:visited {
+    color: purple;
+    /* After clicking */
+}
+
+a:active {
+    color: orange;
+    /* While clicking */
+}
+
+a:focus {
+    outline: 2px solid #000;
+}
+
 /* Main Content Section */
 .content {
     text-align: center;

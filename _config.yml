@@ -2,7 +2,7 @@ title: "Homepage"
 description: "Bookmark this page to stay informed about the latest updates and developments on my projects."
 baseurl: "/"
 url: "https://s23010843.github.io"
-#theme: "jekyll-theme-minimal"
+theme: "jekyll-theme-minimal"
 author: "s23010843"
 markdown: kramdown
 
