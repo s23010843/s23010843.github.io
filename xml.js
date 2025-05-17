@@ -20,7 +20,7 @@ fetch('data.xml')
         document.getElementById('chat').textContent = chatContent;
 
         // Update the <a> tag's text and href
-        const chatLink = document.getElementById('chat-link');
+        const chatLink = document.getElementById('github-link');
         //chatLink.textContent = linkText;    // Update the link text
         chatLink.href = linkHref;            // Update the link's href
     })
