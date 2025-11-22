@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function ReactWelcome() {
+export default function Main() {
   return React.createElement(
-    'h1',
+    'p',
     { style: { color: 'blue' } },
     'React is working!'
   );

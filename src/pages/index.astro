@@ -1,18 +1,30 @@
 ---
-import Welcome from '../components/astro/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-import VueWelcome from '../components/vue/VueWelcome.vue';
-import ReactWelcome from '../components/react/ReactWelcome.jsx';
-import AngularWelcome from '../components/angular/welcome.component';
-import SvelteWelcome from '../components/svelte/SvelteWelcome.svelte';
+import Container from '../components/vue/Container.vue';
+import Main from '../components/react/Main.jsx';
+import Header from '../components/angular/header.component';
+import Footer from '../components/svelte/Footer.svelte';
 ---
 
-<Layout title="Data Binding Example">
-	<!-- <Welcome /> -->
-	<p class="text-blue-500">Tailwind CSS is working!</p>
-	<VueWelcome/>
-	<ReactWelcome client:only="react" />
-	<AngularWelcome client:load />
-	<SvelteWelcome />
+<Layout title="">
+	<!-- Header Section -->
+    <header>
+		<Header client:load/>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="content">
+        <Main client:only="react" />
+    	<Container/>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="fixed-footer">
+        <Footer/>
+    </footer>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+
 </Layout>

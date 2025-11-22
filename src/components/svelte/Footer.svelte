@@ -1,0 +1,6 @@
+<p>
+    &copy; <span id="current-year"></span> Official | All Rights Reserved |
+    <a id="github-link" href="Loading..." target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-github"></i> github
+    </a>
+</p>
