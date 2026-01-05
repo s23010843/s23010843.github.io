@@ -22,6 +22,7 @@
     "@angular/language-service": "^20.3.12",
     "@angular/platform-browser": "^20.3.12",
     "@angular/platform-server": "^20.3.12",
+    "@astrojs/node": "^9.5.1",
     "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/svelte": "^7.2.2",

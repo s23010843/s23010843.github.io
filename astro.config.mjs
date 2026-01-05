@@ -13,6 +13,8 @@ import analogjsangular from '@analogjs/astro-angular';
 
 import svelte from '@astrojs/svelte';
 
+import node from '@astrojs/node';
+
 const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
 const repoFullName = process.env.GITHUB_REPOSITORY;
 const repoName = repoFullName?.split('/')?.[1];
@@ -35,6 +37,9 @@ export default defineConfig({
   site: resolvedSite,
   base: resolvedBase,
   output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  }),
 
 	vite: {
 		plugins: [tailwindcss()]
