@@ -641,26 +641,60 @@ class ChatbotModel {
         }
       }
 
-      // Quadratic equation: ax^2 + bx + c = 0
-      const quadMatch = message.match(/(-?\d+\.?\d*)\s*x\^?2\s*([+-]\s*\d+\.?\d*)\s*x\s*([+-]\s*\d+\.?\d*)\s*=\s*0/);
+      // Quadratic expression/equation recognition (with or without = 0)
+      const quadMatch = message.match(/(-?\d+\.?\d*)\s*\*?\s*x\^?2\s*([+-]\s*\d+\.?\d*)\s*\*?\s*x\s*([+-]\s*\d+\.?\d*)(?:\s*=\s*0)?/);
       if (quadMatch) {
         const a = parseFloat(quadMatch[1]);
         const b = parseFloat(quadMatch[2].replace(/\s/g, ''));
         const c = parseFloat(quadMatch[3].replace(/\s/g, ''));
         const discriminant = b * b - 4 * a * c;
         
+        // Format the equation nicely
+        const formatted = `${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c}`;
+        
+        // Try to factor if possible (for integer coefficients)
+        let factored = '';
+        if (Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(c)) {
+          // Check if it factors nicely
+          if (discriminant >= 0) {
+            const sqrtDisc = Math.sqrt(discriminant);
+            if (Number.isInteger(sqrtDisc)) {
+              const x1 = (-b + sqrtDisc) / (2 * a);
+              const x2 = (-b - sqrtDisc) / (2 * a);
+              if (Number.isInteger(x1) && Number.isInteger(x2)) {
+                factored = `\n\nFactored form: ${a === 1 ? '' : a}(x ${x1 >= 0 ? '-' : '+'} ${Math.abs(x1)})(x ${x2 >= 0 ? '-' : '+'} ${Math.abs(x2)})`;
+              }
+            }
+          }
+        }
+        
+        // Calculate vertex
+        const h = -b / (2 * a);
+        const k = a * h * h + b * h + c;
+        
+        let response = `Quadratic: ${formatted}\n`;
+        response += `\nVertex form: ${a}(x ${h >= 0 ? '-' : '+'} ${Math.abs(h).toFixed(4)})² ${k >= 0 ? '+' : ''}${k.toFixed(4)}`;
+        response += `\nVertex: (${h.toFixed(4)}, ${k.toFixed(4)})`;
+        response += factored;
+        
+        // Solve for x = 0
         if (discriminant > 0) {
           const x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
           const x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
-          return `Quadratic equation ${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0\nSolutions:\nx₁ = ${x1.toFixed(6)}\nx₂ = ${x2.toFixed(6)}`;
+          response += `\n\nRoots (x-intercepts):\nx₁ = ${x1.toFixed(6)}\nx₂ = ${x2.toFixed(6)}`;
         } else if (discriminant === 0) {
           const x = -b / (2 * a);
-          return `Quadratic equation ${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0\nOne solution: x = ${x.toFixed(6)}`;
+          response += `\n\nRoot: x = ${x.toFixed(6)} (double root)`;
         } else {
           const real = -b / (2 * a);
           const imag = Math.sqrt(-discriminant) / (2 * a);
-          return `Quadratic equation ${a}x² ${b >= 0 ? '+' : ''}${b}x ${c >= 0 ? '+' : ''}${c} = 0\nComplex solutions:\nx₁ = ${real.toFixed(4)} + ${imag.toFixed(4)}i\nx₂ = ${real.toFixed(4)} - ${imag.toFixed(4)}i`;
+          response += `\n\nComplex roots:\nx₁ = ${real.toFixed(4)} + ${imag.toFixed(4)}i\nx₂ = ${real.toFixed(4)} - ${imag.toFixed(4)}i`;
         }
+        
+        response += `\n\ny-intercept: (0, ${c})`;
+        response += `\nDirection: ${a > 0 ? 'Opens upward ∪' : 'Opens downward ∩'}`;
+        
+        return response;
       }
 
       // Basic arithmetic: Clean and evaluate

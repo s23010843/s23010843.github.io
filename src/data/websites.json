@@ -1,0 +1,93 @@
+[
+  {
+    "title": "Github Tutorial",
+    "url": "https://s23010843.github.io/tutorial/github",
+    "category": "My Tutorials",
+    "icon": "fab fa-github",
+    "color": "text-gray-800"
+  },
+  {
+    "title": "Python Tutorial",
+    "url": "https://s23010843.github.io/tutorial/python",
+    "category": "My Tutorials",
+    "icon": "fab fa-python",
+    "color": "text-blue-600"
+  },
+  {
+    "title": "JavaScript Tutorial",
+    "url": "https://s23010843.github.io/tutorial/javascript",
+    "category": "My Tutorials",
+    "icon": "fab fa-js",
+    "color": "text-yellow-500"
+  },
+  {
+    "title": "HTML Tutorial",
+    "url": "https://s23010843.github.io/tutorial/html",
+    "category": "My Tutorials",
+    "icon": "fab fa-html5",
+    "color": "text-orange-600"
+  },
+  {
+    "title": "CSS Tutorial",
+    "url": "https://s23010843.github.io/tutorial/css",
+    "category": "My Tutorials",
+    "icon": "fab fa-css3-alt",
+    "color": "text-blue-500"
+  },
+  {
+    "title": "Essential Monitor",
+    "url": "https://s23010843.github.io/essentials-monitor",
+    "category": "My Projects",
+    "icon": "fas fa-chart-line",
+    "color": "text-green-600"
+  },
+  {
+    "title": "Password Generator",
+    "url": "https://s23010843.github.io/password-generator",
+    "category": "My Projects",
+    "icon": "fas fa-key",
+    "color": "text-green-600"
+  },
+  {
+    "title": "Diabetes Project",
+    "url": "https://diabetes-project.netlify.app",
+    "category": "My Projects",
+    "icon": "fas fa-notes-medical",
+    "color": "text-red-600"
+  },
+  {
+    "title": "Astro",
+    "url": "https://astro.build",
+    "category": "Resources",
+    "icon": "fas fa-rocket",
+    "color": "text-purple-600"
+  },
+  {
+    "title": "Tailwind CSS",
+    "url": "https://tailwindcss.com",
+    "category": "Resources",
+    "icon": "fas fa-wind",
+    "color": "text-cyan-500"
+  },
+  {
+    "title": "GitHub",
+    "url": "https://github.com",
+    "category": "Resources",
+    "icon": "fab fa-github",
+    "color": "text-gray-800"
+  },
+  {
+    "title": "Stack Overflow",
+    "url": "https://stackoverflow.com",
+    "category": "Resources",
+    "icon": "fab fa-stack-overflow",
+    "color": "text-orange-500"
+  },
+  {
+    "title": "MDN Web Docs",
+    "url": "https://developer.mozilla.org",
+    "category": "Resources",
+    "icon": "fas fa-book",
+    "color": "text-indigo-600"
+  }
+]
