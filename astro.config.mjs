@@ -34,6 +34,7 @@ const resolvedBase =
 export default defineConfig({
   site: resolvedSite,
   base: resolvedBase,
+  output: 'server',
 
 	vite: {
 		plugins: [tailwindcss()]

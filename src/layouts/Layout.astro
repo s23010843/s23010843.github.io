@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ChatWidget from '../components/ChatWidget.astro';
 
 const { title } = Astro.props;
 const pageTitle =
@@ -22,6 +23,7 @@ const pageTitle =
 	</head>
 	<body>
 		<slot />
+		<ChatWidget />
 	</body>
 </html>
 
