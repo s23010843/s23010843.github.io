@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css';
+
+const { title } = Astro.props;
+const pageTitle =
+	typeof title === 'string' && title.trim().length > 0 ? title : 'Home | Official';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +15,7 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
     <meta name="author" content="s23010843">
 		<link rel="sitemap" href="sitemap-index.xml" />
-    <title>Home | Official</title>
+		<title>{pageTitle}</title>
 		<!-- <link rel="icon" type="image/svg+xml" href="favicon.svg" /> -->
     <link rel="icon" href="/universal/favicons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

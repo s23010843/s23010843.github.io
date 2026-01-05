@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+import Header from '../components/angular/header.component';
+import Footer from '../components/svelte/Footer.svelte';
+---
+
+<Layout title="404 | Official">
+	<header>
+		<Header client:load />
+	</header>
+
+	<main class="content">
+		<h2>404 — Page not found</h2>
+		<p>The page you’re looking for doesn’t exist.</p>
+		<p><a href="/">Go back home</a></p>
+	</main>
+
+	<footer class="fixed-footer">
+		<Footer />
+	</footer>
+
+	<script is:inline src="script.js"></script>
+</Layout>
