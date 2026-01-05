@@ -156,7 +156,7 @@ import Layout from '../../layouts/Layout.astro';
       const payload = { messages: conversationHistory };
       console.log('Sending payload:', payload); // Debug log
 
-      const response = await fetch('/api/chat', {
+      const response = await fetch('api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

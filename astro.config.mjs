@@ -27,8 +27,11 @@ const resolvedSite = repoOwner
 // For GitHub Pages:
 // - User/organization pages repo: <owner>.github.io => base should be '/'
 // - Project pages repo: <repo> => base should be '/<repo>'
-const resolvedBase =
-  isGitHubActions && repoName && repoOwner && repoName !== `${repoOwner}.github.io`
+const isDev = process.env.NODE_ENV !== 'production' && process.env.GITHUB_ACTIONS !== 'true';
+
+const resolvedBase = isDev
+  ? '/'
+  : (isGitHubActions || process.env.NODE_ENV === 'production') && repoName && repoOwner && repoName !== `${repoOwner}.github.io`
     ? `/${repoName}`
     : '/';
 
@@ -36,7 +39,7 @@ const resolvedBase =
 export default defineConfig({
   site: resolvedSite,
   base: resolvedBase,
-  output: isGitHubActions ? 'static' : 'hybrid',
+  output: isGitHubActions ? 'static' : 'server',
   adapter: isGitHubActions ? undefined : node({
     mode: 'standalone'
   }),
