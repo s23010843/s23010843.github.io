@@ -151,6 +151,201 @@ class ChatbotModel {
         .trim();
 
       // Handle special math operations
+
+      // ========== LINEAR ALGEBRA ==========
+      
+      // Vector magnitude/length
+      if (/magnitude|length|norm/.test(expr) && /vector/.test(expr)) {
+        const match = expr.match(/\[?\s*(-?\d+\.?\d*)\s*,\s*(-?\d+\.?\d*)(?:\s*,\s*(-?\d+\.?\d*))?\s*\]?/);
+        if (match) {
+          const components = [parseFloat(match[1]), parseFloat(match[2])];
+          if (match[3]) components.push(parseFloat(match[3]));
+          const magnitude = Math.sqrt(components.reduce((sum, val) => sum + val * val, 0));
+          return `|v| = √(${components.map(c => c + '²').join(' + ')}) = ${magnitude.toFixed(6)}`;
+        }
+      }
+
+      // Dot product
+      if (/dot product/.test(expr)) {
+        const vectors = expr.match(/\[(-?\d+\.?\d*(?:\s*,\s*-?\d+\.?\d*)*)\]/g);
+        if (vectors && vectors.length === 2) {
+          const v1 = vectors[0].match(/-?\d+\.?\d*/g)?.map(n => parseFloat(n)) || [];
+          const v2 = vectors[1].match(/-?\d+\.?\d*/g)?.map(n => parseFloat(n)) || [];
+          if (v1.length === v2.length) {
+            const dotProd = v1.reduce((sum, val, i) => sum + val * v2[i], 0);
+            return `[${v1.join(', ')}] · [${v2.join(', ')}] = ${dotProd}`;
+          }
+        }
+      }
+
+      // Cross product (3D vectors only)
+      if (/cross product/.test(expr)) {
+        const vectors = expr.match(/\[(-?\d+\.?\d*(?:\s*,\s*-?\d+\.?\d*)*)\]/g);
+        if (vectors && vectors.length === 2) {
+          const v1 = vectors[0].match(/-?\d+\.?\d*/g)?.map(n => parseFloat(n)) || [];
+          const v2 = vectors[1].match(/-?\d+\.?\d*/g)?.map(n => parseFloat(n)) || [];
+          if (v1.length === 3 && v2.length === 3) {
+            const cross = [
+              v1[1] * v2[2] - v1[2] * v2[1],
+              v1[2] * v2[0] - v1[0] * v2[2],
+              v1[0] * v2[1] - v1[1] * v2[0]
+            ];
+            return `[${v1.join(', ')}] × [${v2.join(', ')}] = [${cross.map(c => c.toFixed(4)).join(', ')}]`;
+          }
+        }
+      }
+
+      // Matrix determinant (2x2)
+      if (/determinant|det/.test(expr) && /2x2|2\s*x\s*2/.test(expr)) {
+        const nums = expr.match(/-?\d+\.?\d*/g);
+        if (nums && nums.length === 4) {
+          const [a, b, c, d] = nums.map(n => parseFloat(n));
+          const det = a * d - b * c;
+          return `det([${a}, ${b}; ${c}, ${d}]) = ${a}(${d}) - ${b}(${c}) = ${det}`;
+        }
+      }
+
+      // Matrix determinant (3x3)
+      if (/determinant|det/.test(expr) && /3x3|3\s*x\s*3/.test(expr)) {
+        const nums = expr.match(/-?\d+\.?\d*/g);
+        if (nums && nums.length === 9) {
+          const m = nums.map(n => parseFloat(n));
+          const det = m[0] * (m[4] * m[8] - m[5] * m[7]) -
+                      m[1] * (m[3] * m[8] - m[5] * m[6]) +
+                      m[2] * (m[3] * m[7] - m[4] * m[6]);
+          return `det(3×3 matrix) = ${det.toFixed(4)}`;
+        }
+      }
+
+      // Matrix transpose
+      if (/transpose/.test(expr)) {
+        // Try to parse matrix dimensions and values
+        const match = expr.match(/(\d+)\s*x\s*(\d+)/);
+        if (match) {
+          const rows = parseInt(match[1]);
+          const cols = parseInt(match[2]);
+          const nums = expr.match(/-?\d+\.?\d*/g)?.slice(2); // Skip dimension numbers
+          if (nums && nums.length === rows * cols) {
+            const matrix = nums.map(n => parseFloat(n));
+            const transposed: number[] = [];
+            for (let j = 0; j < cols; j++) {
+              for (let i = 0; i < rows; i++) {
+                transposed.push(matrix[i * cols + j]);
+              }
+            }
+            return `Transpose (${rows}×${cols} → ${cols}×${rows}):\n[${transposed.join(', ')}]`;
+          }
+        }
+      }
+
+      // ========== CALCULUS - DERIVATIVES ==========
+      
+      // Derivative of polynomial terms
+      if (/derivative|derive|differentiate|d\/dx/.test(expr)) {
+        // Power rule: d/dx(x^n) = n*x^(n-1)
+        const powerMatch = expr.match(/x\^(\d+)|x\*\*(\d+)/);
+        if (powerMatch) {
+          const n = parseInt(powerMatch[1] || powerMatch[2]);
+          if (n === 0) return "d/dx(x⁰) = 0";
+          if (n === 1) return "d/dx(x) = 1";
+          return `d/dx(x^${n}) = ${n}x^${n - 1}`;
+        }
+        
+        // Coefficient with power: d/dx(ax^n)
+        const coeffMatch = expr.match(/(-?\d+\.?\d*)\s*\*?\s*x\^(\d+)/);
+        if (coeffMatch) {
+          const a = parseFloat(coeffMatch[1]);
+          const n = parseInt(coeffMatch[2]);
+          const newCoeff = a * n;
+          const newPow = n - 1;
+          if (newPow === 0) return `d/dx(${a}x^${n}) = ${newCoeff}`;
+          if (newPow === 1) return `d/dx(${a}x^${n}) = ${newCoeff}x`;
+          return `d/dx(${a}x^${n}) = ${newCoeff}x^${newPow}`;
+        }
+
+        // Linear: d/dx(ax + b)
+        const linearMatch = expr.match(/(-?\d+\.?\d*)\s*\*?\s*x/);
+        if (linearMatch) {
+          const a = parseFloat(linearMatch[1]);
+          return `d/dx(${a}x) = ${a}`;
+        }
+
+        // Special functions
+        if (/sin\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(sin(x)) = cos(x)";
+        if (/cos\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(cos(x)) = -sin(x)";
+        if (/tan\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(tan(x)) = sec²(x)";
+        if (/e\^x|exp\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(e^x) = e^x";
+        if (/ln\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(ln(x)) = 1/x";
+        if (/log\s*\(?\s*x\s*\)?/.test(expr)) return "d/dx(log(x)) = 1/(x·ln(10))";
+      }
+
+      // ========== CALCULUS - INTEGRALS ==========
+      
+      // Integration of polynomial terms
+      if (/integrate|integral|antiderivative/.test(expr)) {
+        // Power rule: ∫x^n dx = x^(n+1)/(n+1) + C
+        const powerMatch = expr.match(/x\^(\d+)|x\*\*(\d+)/);
+        if (powerMatch) {
+          const n = parseInt(powerMatch[1] || powerMatch[2]);
+          const newN = n + 1;
+          return `∫x^${n} dx = x^${newN}/${newN} + C`;
+        }
+
+        // Coefficient with power: ∫ax^n dx
+        const coeffMatch = expr.match(/(-?\d+\.?\d*)\s*\*?\s*x\^(\d+)/);
+        if (coeffMatch) {
+          const a = parseFloat(coeffMatch[1]);
+          const n = parseInt(coeffMatch[2]);
+          const newN = n + 1;
+          const newCoeff = a / newN;
+          return `∫${a}x^${n} dx = ${newCoeff.toFixed(4)}x^${newN} + C`;
+        }
+
+        // Linear: ∫ax dx
+        const linearMatch = expr.match(/(-?\d+\.?\d*)\s*\*?\s*x(?!\^)/);
+        if (linearMatch) {
+          const a = parseFloat(linearMatch[1]);
+          const result = a / 2;
+          return `∫${a}x dx = ${result}x² + C`;
+        }
+
+        // Constant: ∫a dx
+        const constMatch = expr.match(/^(-?\d+\.?\d*)(?:\s|$)/);
+        if (constMatch) {
+          const a = parseFloat(constMatch[1]);
+          return `∫${a} dx = ${a}x + C`;
+        }
+
+        // Special functions
+        if (/sin\s*\(?\s*x\s*\)?/.test(expr)) return "∫sin(x) dx = -cos(x) + C";
+        if (/cos\s*\(?\s*x\s*\)?/.test(expr)) return "∫cos(x) dx = sin(x) + C";
+        if (/sec\^2|sec\*\*2/.test(expr)) return "∫sec²(x) dx = tan(x) + C";
+        if (/e\^x|exp\s*\(?\s*x\s*\)?/.test(expr)) return "∫e^x dx = e^x + C";
+        if (/1\/x/.test(expr) || expr.includes('x^-1')) return "∫1/x dx = ln|x| + C";
+        
+        // Definite integral using Simpson's rule
+        const defMatch = expr.match(/from\s+(-?\d+\.?\d*)\s+to\s+(-?\d+\.?\d*)/);
+        if (defMatch) {
+          const a = parseFloat(defMatch[1]);
+          const b = parseFloat(defMatch[2]);
+          
+          // Try to identify the function
+          if (/x\^2/.test(expr)) {
+            const result = (Math.pow(b, 3) / 3) - (Math.pow(a, 3) / 3);
+            return `∫[${a} to ${b}] x² dx = [x³/3] = ${result.toFixed(6)}`;
+          }
+          if (/x\^3/.test(expr)) {
+            const result = (Math.pow(b, 4) / 4) - (Math.pow(a, 4) / 4);
+            return `∫[${a} to ${b}] x³ dx = [x⁴/4] = ${result.toFixed(6)}`;
+          }
+          if (/\bx\b/.test(expr) && !/x\^/.test(expr)) {
+            const result = (Math.pow(b, 2) / 2) - (Math.pow(a, 2) / 2);
+            return `∫[${a} to ${b}] x dx = [x²/2] = ${result.toFixed(6)}`;
+          }
+        }
+      }
+
+      // ========== BASIC CALCULATOR FUNCTIONS ==========
       
       // Absolute value
       if (expr.includes('abs') || expr.includes('absolute')) {
