@@ -2,54 +2,66 @@
 // Floating chat widget that appears in bottom-right corner
 ---
 
-<div id="chat-widget-container" class="fixed bottom-5 right-5 z-[9999] font-sans">
+<div id="chat-widget-container" class="!fixed !bottom-6 !right-6 !z-[9999] font-sans sm:!bottom-4 sm:!right-4 max-sm:m-safe">
   <!-- Floating chat button -->
-  <button id="chat-toggle-btn" class="chat-fab w-15 h-15 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 border-none cursor-pointer shadow-lg shadow-purple-500/40 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-xl hover:shadow-purple-500/60 active:scale-95 relative" aria-label="Open chat">
-    <svg class="chat-icon w-7 h-7 text-white transition-all duration-300 absolute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <button id="chat-toggle-btn" class="w-14 h-14 sm:w-[3.25rem] sm:h-[3.25rem] rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 !border-none cursor-pointer shadow-2xl shadow-purple-500/50 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-[0_20px_60px_rgba(168,85,247,0.6)] active:scale-95 relative group overflow-hidden" aria-label="Open chat">
+    <div class="absolute inset-0 bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
+    <svg class="chat-icon w-7 h-7 text-white transition-all duration-300 absolute z-10 opacity-100 rotate-0 scale-100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
     </svg>
-    <svg class="close-icon w-7 h-7 text-white transition-all duration-300 absolute opacity-0 rotate-90 scale-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <svg class="close-icon w-7 h-7 text-white transition-all duration-300 absolute z-10 opacity-0 rotate-90 scale-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   </button>
 
   <!-- Chat window -->
-  <div id="chat-widget-window" class="chat-window absolute bottom-20 right-0 w-[380px] max-w-[calc(100vw-40px)] h-[550px] max-h-[calc(100vh-120px)] bg-slate-900 rounded-2xl shadow-2xl flex flex-col opacity-0 translate-y-5 scale-90 pointer-events-none transition-all duration-300 ease-out border border-white/10 overflow-hidden">
-    <div class="chat-window-header bg-gradient-to-r from-purple-600 to-blue-600 px-5 py-4 flex justify-between items-center rounded-t-2xl">
-      <div>
-        <h3 class="m-0 text-lg text-white font-bold">AI Assistant</h3>
-        <p class="status-text mt-1 text-xs text-white/90 flex items-center gap-1.5">
-          <span class="status-dot w-2 h-2 bg-green-400 rounded-full inline-block shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></span> 
-          Online
-        </p>
-      </div>
-      <button id="chat-minimize-btn" class="minimize-btn bg-white/20 border-none rounded-lg w-8 h-8 flex items-center justify-center cursor-pointer transition-all duration-200 text-white hover:bg-white/30" aria-label="Minimize chat">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-    </div>
-
-    <div id="widget-chat-body" class="chat-window-body flex-1 overflow-y-auto p-4 flex flex-col gap-3 bg-slate-800/90"></div>
-
-    <div class="chat-window-footer p-4 border-t border-white/5 bg-slate-900/90">
-      <form id="widget-chat-form" class="flex gap-2 items-center">
-        <input
-          id="widget-chat-input"
-          type="text"
-          placeholder="Ask about this project..."
-          autocomplete="off"
-          aria-label="Message"
-          class="flex-1 px-3.5 py-3 rounded-xl border border-white/10 bg-white/5 text-white text-sm outline-none transition-all duration-200 focus:border-cyan-400 focus:bg-white/8 disabled:opacity-50 disabled:cursor-not-allowed"
-        />
-        <button type="submit" aria-label="Send message" class="w-10 h-10 rounded-xl border-none bg-gradient-to-br from-teal-600 to-cyan-400 text-white cursor-pointer flex items-center justify-center transition-all duration-200 shadow-lg shadow-teal-600/30 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-teal-600/40 active:translate-y-0">
+  <div id="chat-widget-window" class="absolute bottom-[76px] sm:bottom-[68px] right-0 w-[400px] sm:w-[calc(100vw-32px)] max-w-[calc(100vw-48px)] h-[600px] sm:h-[calc(100vh-96px)] max-h-[calc(100vh-120px)] rounded-2xl shadow-[0_25px_80px_rgba(0,0,0,0.6)] flex flex-col opacity-0 translate-y-5 scale-90 pointer-events-none transition-all duration-300 ease-out border border-white/10 overflow-hidden backdrop-blur-xl relative">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-95"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.15),transparent_50%)] opacity-60"></div>
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIvPjwvZz48L3N2Zz4=')] opacity-20"></div>
+    <div class="relative z-10 flex flex-col h-full">
+      <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 px-5 py-4 flex justify-between items-center rounded-t-2xl shadow-lg relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-50"></div>
+        <div class="relative z-10">
+          <h3 class="m-0 text-lg text-white font-bold tracking-tight">AI Assistant</h3>
+          <p class="mt-1.5 text-xs text-white/95 flex items-center gap-2 font-medium">
+            <span class="w-2.5 h-2.5 bg-emerald-400 rounded-full inline-block shadow-[0_0_12px_rgba(52,211,153,1)] animate-pulse"></span> 
+            <span>Online & Ready</span>
+          </p>
+        </div>
+        <button id="chat-minimize-btn" class="relative z-10 bg-white/20 border-none rounded-lg w-9 h-9 flex items-center justify-center cursor-pointer transition-all duration-200 text-white hover:bg-white/30 hover:scale-110 active:scale-95" aria-label="Minimize chat">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
         </button>
-      </form>
+      </div>
+
+      <div id="widget-chat-body" class="flex-1 overflow-y-auto p-5 flex flex-col gap-4 relative scrollbar-thin scrollbar-thumb-purple-500/60 scrollbar-track-black/20">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-500/5 to-transparent opacity-60 pointer-events-none"></div>
+      </div>
+
+      <div class="p-5 border-t border-white/10 bg-slate-900/95 backdrop-blur-sm relative">
+        <div class="absolute inset-0 bg-gradient-to-t from-purple-900/10 to-transparent pointer-events-none"></div>
+        <form id="widget-chat-form" class="flex gap-3 items-center relative z-10">
+          <input
+            id="widget-chat-input"
+            type="text"
+            placeholder="Type your message..."
+            autocomplete="off"
+            aria-label="Message"
+            class="flex-1 px-4 py-3.5 rounded-xl border border-white/20 bg-white/10 text-white text-sm placeholder-white/50 outline-none transition-all duration-200 focus:border-indigo-400 focus:bg-white/15 focus:shadow-[0_0_20px_rgba(129,140,248,0.3)] focus:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed"
+          />
+          <button type="submit" aria-label="Send message" class="w-11 h-11 rounded-xl border-none bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white cursor-pointer flex items-center justify-center transition-all duration-200 shadow-lg shadow-purple-600/40 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-600/60 active:translate-y-0 hover:scale-105 relative overflow-hidden group">
+            <div class="absolute inset-0 bg-gradient-to-tr from-pink-500 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="relative z-10 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -94,14 +106,26 @@
     chatBody.innerHTML = '';
     messages.forEach((msg) => {
       const bubble = document.createElement('div');
-      bubble.className = `chat-bubble ${msg.role}`;
+      bubble.className = msg.role === 'bot' 
+        ? 'max-w-[85%] self-start flex flex-col gap-1.5 px-4 py-3 rounded-[18px_18px_18px_4px] text-white border border-white/10 relative backdrop-blur-[10px] animate-[slideIn_0.4s_cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-px transition-transform'
+        : 'max-w-[85%] self-end flex flex-col gap-1.5 px-4 py-3 rounded-[18px_18px_4px_18px] text-white border border-white/15 relative backdrop-blur-[10px] animate-[slideIn_0.4s_cubic-bezier(0.34,1.56,0.64,1)] hover:-translate-y-px transition-transform';
+      
+      bubble.style.background = msg.role === 'bot'
+        ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.95), rgba(139, 92, 246, 0.95))'
+        : 'linear-gradient(135deg, rgba(16, 185, 129, 0.95), rgba(5, 150, 105, 0.95))';
+      
+      bubble.style.boxShadow = msg.role === 'bot'
+        ? '0 4px 20px rgba(99, 102, 241, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 32px rgba(99, 102, 241, 0.2)'
+        : '0 4px 20px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1), 0 8px 32px rgba(16, 185, 129, 0.2)';
       
       const text = document.createElement('p');
+      text.className = 'm-0 leading-relaxed text-sm break-words whitespace-pre-wrap font-normal tracking-[0.01em]';
       text.textContent = msg.text;
       bubble.appendChild(text);
 
       const time = document.createElement('span');
-      time.className = 'bubble-time';
+      time.className = 'text-[11px] opacity-70 text-white/70 self-end mt-1 font-medium';
+      time.style.textShadow = '0 0 10px rgba(0, 0, 0, 0.3)';
       time.textContent = new Date(msg.ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       bubble.appendChild(time);
 
@@ -110,8 +134,9 @@
 
     if (typing) {
       const typingBubble = document.createElement('div');
-      typingBubble.className = 'chat-bubble bot typing';
-      typingBubble.innerHTML = '<span></span><span></span><span></span>';
+      typingBubble.className = 'max-w-[85%] self-start flex flex-row gap-1.5 items-center py-4 px-5 rounded-[18px_18px_18px_4px] backdrop-blur-[10px]';
+      typingBubble.style.background = 'linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(139, 92, 246, 0.85))';
+      typingBubble.innerHTML = '<span class="w-[9px] h-[9px] bg-white/90 rounded-full shadow-[0_2px_8px_rgba(255,255,255,0.3)] animate-bounce"></span><span class="w-[9px] h-[9px] bg-white/90 rounded-full shadow-[0_2px_8px_rgba(255,255,255,0.3)] animate-bounce [animation-delay:0.2s]"></span><span class="w-[9px] h-[9px] bg-white/90 rounded-full shadow-[0_2px_8px_rgba(255,255,255,0.3)] animate-bounce [animation-delay:0.4s]"></span>';
       chatBody.appendChild(typingBubble);
     }
 
@@ -177,13 +202,25 @@
 
   function toggleChat() {
     isOpen = !isOpen;
+    const btn = document.getElementById('chat-toggle-btn');
+    const chatIcon = btn.querySelector('.chat-icon');
+    const closeIcon = btn.querySelector('.close-icon');
+    
     if (isOpen) {
-      chatWindow.classList.add('open');
-      toggleBtn.classList.add('open');
+      chatWindow.classList.remove('opacity-0', 'translate-y-5', 'scale-90', 'pointer-events-none');
+      chatWindow.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'pointer-events-auto');
+      chatIcon.classList.remove('opacity-100', 'rotate-0', 'scale-100');
+      chatIcon.classList.add('opacity-0', '-rotate-90', 'scale-0');
+      closeIcon.classList.remove('opacity-0', 'rotate-90', 'scale-0');
+      closeIcon.classList.add('opacity-100', 'rotate-0', 'scale-100');
       setTimeout(() => chatInput.focus(), 100);
     } else {
-      chatWindow.classList.remove('open');
-      toggleBtn.classList.remove('open');
+      chatWindow.classList.remove('opacity-100', 'translate-y-0', 'scale-100', 'pointer-events-auto');
+      chatWindow.classList.add('opacity-0', 'translate-y-5', 'scale-90', 'pointer-events-none');
+      chatIcon.classList.remove('opacity-0', '-rotate-90', 'scale-0');
+      chatIcon.classList.add('opacity-100', 'rotate-0', 'scale-100');
+      closeIcon.classList.remove('opacity-100', 'rotate-0', 'scale-100');
+      closeIcon.classList.add('opacity-0', 'rotate-90', 'scale-0');
     }
   }
 
@@ -194,145 +231,3 @@
   render();
 })();
 </script>
-
-<style>
-  /* Icon transitions for FAB button */
-  .chat-fab.open .chat-icon {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0);
-  }
-
-  .chat-fab.open .close-icon {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
-
-  /* Chat window open state */
-  .chat-window.open {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    pointer-events: auto;
-  }
-
-  /* Chat bubble animations and styles */
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .chat-bubble {
-    max-width: 80%;
-    padding: 10px 14px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    animation: slideIn 0.3s ease;
-    position: relative;
-  }
-
-  .chat-bubble.bot {
-    background: #1d4ed8 !important;
-    align-self: flex-start;
-    border-radius: 12px 12px 12px 4px;
-    color: #ffffff !important;
-    box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
-  }
-
-  .chat-bubble.user {
-    background: #16a34a !important;
-    align-self: flex-end;
-    border-radius: 12px 12px 4px 12px;
-    color: #ffffff !important;
-    box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
-  }
-
-  .chat-bubble p {
-    margin: 0;
-    line-height: 1.6;
-    font-size: 15px;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-  }
-
-  .bubble-time {
-    font-size: 11px;
-    opacity: 0.7;
-    color: rgba(255, 255, 255, 0.7);
-    align-self: flex-end;
-    margin-top: 2px;
-  }
-
-  /* Typing indicator */
-  .chat-bubble.typing {
-    padding: 12px 14px;
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .chat-bubble.typing span {
-    width: 8px;
-    height: 8px;
-    background: #8696a0;
-    border-radius: 50%;
-    animation: bounce 1.2s infinite;
-  }
-
-  .chat-bubble.typing span:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-
-  .chat-bubble.typing span:nth-child(3) {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes bounce {
-    0%, 60%, 100% { transform: translateY(0); }
-    30% { transform: translateY(-8px); }
-  }
-
-  /* Custom scrollbar */
-  .chat-window-body::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .chat-window-body::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .chat-window-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-  }
-
-  .chat-window-body::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  /* Responsive design */
-  @media (max-width: 480px) {
-    #chat-widget-container {
-      bottom: 1rem;
-      right: 1rem;
-    }
-
-    .chat-fab {
-      width: 3.5rem;
-      height: 3.5rem;
-    }
-
-    .chat-window {
-      width: calc(100vw - 30px);
-      height: calc(100vh - 100px);
-      bottom: 75px;
-    }
-  }
-</style>
