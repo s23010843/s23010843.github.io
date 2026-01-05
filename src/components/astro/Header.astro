@@ -1,0 +1,65 @@
+---
+// No props needed for now
+---
+
+<header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo/Brand -->
+            <div class="flex items-center gap-3">
+                <a href="/" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-400 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all">
+                        <i class="fas fa-home text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent hidden sm:block">
+                        Official
+                    </span>
+                </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center gap-1">
+                <a href="/" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="/websites" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-globe mr-2"></i>Websites
+                </a>
+                <a href="/chat" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-comments mr-2"></i>Chat
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-700 hover:bg-teal-50 rounded-lg transition-all">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pb-4 pt-2 border-t border-gray-200 mt-2">
+            <div class="flex flex-col gap-2">
+                <a href="/" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+                <a href="/websites" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-globe mr-2"></i>Websites
+                </a>
+                <a href="/chat" class="px-4 py-2 text-gray-700 hover:text-teal-600 hover:bg-teal-50 rounded-lg transition-all font-medium">
+                    <i class="fas fa-comments mr-2"></i>Chat
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+</script>
