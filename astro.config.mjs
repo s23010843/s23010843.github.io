@@ -36,8 +36,8 @@ const resolvedBase =
 export default defineConfig({
   site: resolvedSite,
   base: resolvedBase,
-  output: 'server',
-  adapter: node({
+  output: isGitHubActions ? 'static' : 'hybrid',
+  adapter: isGitHubActions ? undefined : node({
     mode: 'standalone'
   }),
 
