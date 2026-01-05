@@ -5,7 +5,7 @@ import { Navbar } from './app/navbar/navbar';
   selector: 'app-header',
   imports: [Navbar],
   template: `
-    <h1 id="chat">Loading...</h1>
+    <h1 id="chat"></h1>
     <app-navbar></app-navbar>
     `,
   styles: `
@@ -14,5 +14,5 @@ import { Navbar } from './app/navbar/navbar';
 })
 
 export default class Header {
-  title = 'Loading...';
+
 }

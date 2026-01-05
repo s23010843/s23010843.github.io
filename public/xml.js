@@ -1,34 +1,62 @@
-// Fetch and parse the XML file
-fetch('data.xml')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    })
-    .then(data => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, 'application/xml');
+function waitForElementById(id, timeoutMs = 5000) {
+    return new Promise((resolve, reject) => {
+        const existing = document.getElementById(id);
+        if (existing) return resolve(existing);
 
-        // Extract the content of <chat> element
-        const chatContent = xmlDoc.getElementsByTagName('chat')[0]?.textContent || 'Not Found';
-        const linkText = xmlDoc.getElementsByTagName('linkText')[0]?.textContent || 'Default Link';
-        const linkHref = xmlDoc.getElementsByTagName('linkHref')[0]?.textContent || '#';
+        const startedAt = Date.now();
+        const observer = new MutationObserver(() => {
+            const found = document.getElementById(id);
+            if (found) {
+                observer.disconnect();
+                resolve(found);
+            } else if (Date.now() - startedAt > timeoutMs) {
+                observer.disconnect();
+                reject(new Error(`Timed out waiting for #${id}`));
+            }
+        });
 
+        observer.observe(document.documentElement, { childList: true, subtree: true });
 
-        // Update the content of <h1 id="chat">
-        document.getElementById('chat').textContent = chatContent;
-
-        // Update the <a> tag's text and href
-        const chatLink = document.getElementById('github-link');
-        //chatLink.textContent = linkText;    // Update the link text
-        chatLink.href = linkHref;            // Update the link's href
-    })
-    .catch(error => {
-        // Handle errors and update the link to show an error message
-        console.error('Error loading XML file:', error);
-        document.getElementById('chat').textContent = 'Error loading data';
-        const chatLink = document.getElementById('chat-link');
-        chatLink.textContent = 'Error loading data';  // Show error text
-        chatLink.href = '#';  // Fallback href
+        setTimeout(() => {
+            observer.disconnect();
+            const found = document.getElementById(id);
+            if (found) resolve(found);
+            else reject(new Error(`Timed out waiting for #${id}`));
+        }, timeoutMs);
     });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('/data.xml')
+        .then((response) => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.text();
+        })
+        .then(async (data) => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(data, 'application/xml');
+
+            const chatContent = xmlDoc.getElementsByTagName('chat')[0]?.textContent || 'Not Found';
+            const linkHref = xmlDoc.getElementsByTagName('linkHref')[0]?.textContent || '#';
+
+            try {
+                const chatEl = await waitForElementById('chat', 5000);
+                chatEl.textContent = chatContent;
+            } catch {
+                // If the header never mounts, don't fail the rest of the script.
+            }
+
+            const githubLink = document.getElementById('github-link');
+            if (githubLink) {
+                githubLink.href = linkHref;
+            }
+        })
+        .catch((error) => {
+            console.error('Error loading XML file:', error);
+            const chatEl = document.getElementById('chat');
+            if (chatEl) chatEl.textContent = 'Error loading data';
+
+            const githubLink = document.getElementById('github-link');
+            if (githubLink) githubLink.href = '#';
+        });
+});
