@@ -62,6 +62,11 @@ import Layout from '../../layouts/Layout.astro';
   </section>
 </Layout>
 
+<script>
+  import ChatbotModel from '../../lib/chatbot-model';
+  const chatbot = new ChatbotModel();
+</script>
+
 <script is:inline>
 (() => {
   const body = document.getElementById('chat-body');
@@ -143,42 +148,21 @@ import Layout from '../../layouts/Layout.astro';
 
   async function getAIReply(userMessage) {
     try {
+      // Use client-side chatbot model (works on GitHub Pages)
       const conversationHistory = messages.map(msg => ({
         role: msg.role === 'bot' ? 'assistant' : msg.role,
         content: msg.text
       }));
 
-      conversationHistory.push({
-        role: 'user',
-        content: userMessage
-      });
-
-      const payload = { messages: conversationHistory };
-      console.log('Sending payload:', payload); // Debug log
-
-      const response = await fetch('api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        let errorData;
-        try {
-          errorData = await response.json();
-        } catch (e) {
-          throw new Error(`Server error: ${response.status} ${response.statusText}`);
-        }
-        throw new Error(errorData.error || 'Failed to get AI response');
-      }
-
-      const data = await response.json();
-      return data.reply || 'No response generated';
+      // Import chatbot dynamically for client-side execution
+      const { default: ChatbotModel } = await import('../../lib/chatbot-model.ts');
+      const chatbot = new ChatbotModel();
+      
+      const reply = chatbot.generateResponse(userMessage, conversationHistory);
+      return reply;
     } catch (error) {
-      console.error('AI API error:', error);
-      return `Sorry, I encountered an error: ${error.message}. Please try again.`;
+      console.error('Chatbot error:', error);
+      return 'Sorry, I encountered an error processing your message. Please try again.';
     }
   }
 

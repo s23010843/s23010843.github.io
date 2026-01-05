@@ -127,38 +127,21 @@
 
   async function callAPI(userMessage) {
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: messages.map((m) => ({
-            role: m.role === 'bot' ? 'assistant' : 'user',
-            content: m.text,
-          })).concat([{ role: 'user', content: userMessage }]),
-        }),
-      });
+      // Use client-side chatbot model (works on GitHub Pages)
+      const conversationHistory = messages.map((m) => ({
+        role: m.role === 'bot' ? 'assistant' : 'user',
+        content: m.text,
+      }));
 
-      if (!response.ok) {
-        let errorData;
-        try {
-          errorData = await response.json();
-        } catch (e) {
-          throw new Error(`Server error: ${response.status} ${response.statusText}`);
-        }
-        throw new Error(errorData.error || 'Failed to get response');
-      }
-
-      let data;
-      try {
-        data = await response.json();
-      } catch (e) {
-        throw new Error('Invalid response from server - could not parse JSON');
-      }
+      // Import chatbot dynamically for client-side execution
+      const { default: ChatbotModel } = await import('../../lib/chatbot-model.ts');
+      const chatbot = new ChatbotModel();
       
-      return data.reply || 'No response generated';
+      const reply = chatbot.generateResponse(userMessage, conversationHistory);
+      return reply;
     } catch (error) {
-      console.error('API error:', error);
-      return `Sorry, I encountered an error: ${error.message}. Please try again.`;
+      console.error('Chatbot error:', error);
+      return 'Sorry, I encountered an error processing your message. Please try again.';
     }
   }
 
