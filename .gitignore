@@ -141,6 +141,7 @@ vite.config.ts.timestamp-*
 # build output
 dist/
 
+
 # generated types
 .astro/
 
@@ -162,5 +163,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+/.fetch-client/
 
 /trash

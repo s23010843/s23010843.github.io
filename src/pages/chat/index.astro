@@ -102,7 +102,9 @@ import Layout from '../../layouts/Layout.astro';
     body.innerHTML = '';
     messages.forEach((msg) => {
       const item = document.createElement('article');
-      item.className = `bubble ${msg.role}`;
+      // Handle both 'bot' and 'assistant' roles
+      const role = msg.role === 'assistant' ? 'bot' : msg.role;
+      item.className = `bubble ${role}`;
 
       const text = document.createElement('p');
       text.textContent = msg.text;
@@ -145,7 +147,7 @@ import Layout from '../../layouts/Layout.astro';
     try {
       // Use client-side chatbot model (works on GitHub Pages)
       const conversationHistory = messages.map(msg => ({
-        role: msg.role === 'bot' ? 'assistant' : msg.role,
+        role: msg.role === 'bot' ? 'assistant' : msg.role === 'assistant' ? 'assistant' : 'user',
         content: msg.text
       }));
 
@@ -155,6 +157,9 @@ import Layout from '../../layouts/Layout.astro';
         const chatbot = new ChatbotModel();
         
         const reply = chatbot.generateResponse(userMessage, conversationHistory);
+        if (!reply || reply.trim().length === 0) {
+          throw new Error('Empty response received');
+        }
         return reply;
       } catch (importError) {
         console.error('Failed to load chatbot model:', importError);
@@ -170,7 +175,13 @@ import Layout from '../../layouts/Layout.astro';
   async function handleSubmit(event) {
     event.preventDefault();
     const value = input.value.trim();
-    if (!value) return;
+    if (!value || typing) return;
+
+    // Validate message length
+    if (value.length > 1000) {
+      addMessage('bot', 'Message too long. Please keep it under 1000 characters.');
+      return;
+    }
 
     addMessage('user', value);
     input.value = '';
@@ -179,11 +190,18 @@ import Layout from '../../layouts/Layout.astro';
     typing = true;
     render();
 
-    const reply = await getAIReply(value);
-    typing = false;
-    addMessage('bot', reply);
-    input.disabled = false;
-    input.focus();
+    try {
+      const reply = await getAIReply(value);
+      typing = false;
+      addMessage('bot', reply);
+    } catch (error) {
+      typing = false;
+      addMessage('bot', 'Sorry, something went wrong. Please try again.');
+      console.error('Error in handleSubmit:', error);
+    } finally {
+      input.disabled = false;
+      input.focus();
+    }
   }
 
   render();
