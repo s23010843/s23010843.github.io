@@ -1,0 +1,25 @@
+title: "Homepage"
+description: "Bookmark this page to stay informed about the latest updates and developments on my projects."
+baseurl: "/"
+url: "https://s23010843.github.io"
+theme: "jekyll-theme-minimal"
+author: "s23010843"
+markdown: kramdown
+
+# Add favicon link
+favicon: "/universal/favicons/favicon.ico"
+
+# Build settings
+permalink: /:title/  # This may change depending on your URL structure
+paginate: 10
+
+# Social Links (optional)
+social_links:
+  - icon: "github"
+    url: "https://github.com/s23010843"
+
+# Exclude files from being included in the build (optional)
+exclude:
+  - README.md
+  - LICENSE
+  - src/
