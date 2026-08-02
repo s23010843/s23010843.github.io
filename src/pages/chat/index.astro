@@ -62,7 +62,9 @@ import Layout from '../../layouts/Layout.astro';
   </section>
 </Layout>
 
-<script is:inline>
+<script type="module">
+  import ChatbotModel from '../../lib/chatbot-model';
+
 (() => {
   const body = document.getElementById('chat-body');
   const form = document.getElementById('chat-form');
@@ -151,21 +153,13 @@ import Layout from '../../layouts/Layout.astro';
         content: msg.text
       }));
 
-      // Import chatbot dynamically for client-side execution
-      try {
-        const { default: ChatbotModel } = await import('/src/lib/chatbot-model.js');
-        const chatbot = new ChatbotModel();
-        
-        const reply = chatbot.generateResponse(userMessage, conversationHistory);
-        if (!reply || reply.trim().length === 0) {
-          throw new Error('Empty response received');
-        }
-        return reply;
-      } catch (importError) {
-        console.error('Failed to load chatbot model:', importError);
-        // Fallback response without the model
-        return 'I\'m having trouble loading my response system. However, I can share some quick tips:\n\n• Run project: pnpm run dev\n• Build: pnpm run build\n• Check docs/ folder for guides\n\nPlease refresh the page and try again.';
+      const chatbot = new ChatbotModel();
+
+      const reply = chatbot.generateResponse(userMessage, conversationHistory);
+      if (!reply || reply.trim().length === 0) {
+        throw new Error('Empty response received');
       }
+      return reply;
     } catch (error) {
       console.error('Chatbot error:', error);
       return `I encountered an error: ${error instanceof Error ? error.message : 'Unknown error'}. Please try again or refresh the page.`;

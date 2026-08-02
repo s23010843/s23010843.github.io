@@ -77,7 +77,9 @@
   </aside>
 </section>
 
-<script is:inline>
+<script type="module">
+  import ChatbotModel from '../lib/chatbot-model';
+
 (() => {
   const toggleBtn = document.getElementById('chat-toggle-btn');
   const minimizeBtn = document.getElementById('chat-minimize-btn');
@@ -219,16 +221,10 @@
         content: m.text,
       }));
 
-      try {
-        const { default: ChatbotModel } = await import('/src/lib/chatbot-model.js');
-        const chatbot = new ChatbotModel();
-        const reply = chatbot.generateResponse(userMessage, conversationHistory);
-        if (!reply || reply.trim().length === 0) throw new Error('Empty response');
-        return reply;
-      } catch (importError) {
-        console.error('Chatbot error:', importError);
-        return 'I\'m having trouble right now. Quick tips:\n\n• Run: pnpm run dev\n• Build: pnpm run build\n• Check docs/ for guides\n\nTry refreshing the page.';
-      }
+      const chatbot = new ChatbotModel();
+      const reply = chatbot.generateResponse(userMessage, conversationHistory);
+      if (!reply || reply.trim().length === 0) throw new Error('Empty response');
+      return reply;
     } catch (error) {
       return 'Something went wrong. Please try again.';
     }
