@@ -2,57 +2,85 @@
   {
     "title": "Github Tutorial",
     "url": "https://s23010843.github.io/tutorial/github",
-    "category": "My Tutorials",
+    "category": "Our Tutorials",
     "icon": "fab fa-github",
     "color": "text-gray-800"
   },
   {
     "title": "Python Tutorial",
     "url": "https://s23010843.github.io/tutorial/python",
-    "category": "My Tutorials",
+    "category": "Our Tutorials",
     "icon": "fab fa-python",
     "color": "text-blue-600"
   },
   {
+    "title": "Machine Learning Tutorial",
+    "url": "https://machine-learning-course.netlify.app",
+    "category": "Our Tutorials",
+    "icon": "fas fa-brain",
+    "color": "text-indigo-600"
+  },
+  {
     "title": "JavaScript Tutorial",
     "url": "https://s23010843.github.io/tutorial/javascript",
-    "category": "My Tutorials",
+    "category": "Our Tutorials",
     "icon": "fab fa-js",
     "color": "text-yellow-500"
   },
   {
     "title": "HTML Tutorial",
     "url": "https://s23010843.github.io/tutorial/html",
-    "category": "My Tutorials",
+    "category": "Our Tutorials",
     "icon": "fab fa-html5",
     "color": "text-orange-600"
   },
   {
     "title": "CSS Tutorial",
     "url": "https://s23010843.github.io/tutorial/css",
-    "category": "My Tutorials",
+    "category": "Our Tutorials",
     "icon": "fab fa-css3-alt",
     "color": "text-blue-500"
   },
   {
-    "title": "Essential Monitor",
-    "url": "https://s23010843.github.io/essentials-monitor",
-    "category": "My Projects",
-    "icon": "fas fa-chart-line",
+    "title": "Farm Market Prices",
+    "url": "https://farmpriceportal.netlify.app",
+    "category": "Our Projects",
+    "icon": "fas fa-chart-bar",
     "color": "text-green-600"
   },
   {
     "title": "Password Generator",
     "url": "https://s23010843.github.io/password-generator",
-    "category": "My Projects",
+    "category": "Our Projects",
     "icon": "fas fa-key",
+    "color": "text-green-600"
+  },
+  {
+    "title": "Essential Monitor",
+    "url": "https://s23010843.github.io/essentials-monitor",
+    "category": "University Projects",
+    "icon": "fas fa-chart-line",
     "color": "text-green-600"
   },
   {
     "title": "Diabetes Project",
     "url": "https://diabetes-project.netlify.app",
-    "category": "My Projects",
+    "category": "University Projects",
     "icon": "fas fa-notes-medical",
+    "color": "text-red-600"
+  },
+  {
+    "title": "SmartAI Productivity Tool",
+    "url": "https://smartai-tool.netlify.app",
+    "category": "University Projects",
+    "icon": "fas fa-robot",
+    "color": "text-red-600"
+  },
+  {
+    "title": "Nice Market",
+    "url": "https://nicemarket.netlify.app",
+    "category": "University Projects",
+    "icon": "fas fa-shopping-cart",
     "color": "text-red-600"
   },
   {
@@ -77,11 +105,18 @@
     "color": "text-gray-800"
   },
   {
-    "title": "Stack Overflow",
-    "url": "https://stackoverflow.com",
+    "title": "Kaggle",
+    "url": "https://kaggle.com",
     "category": "Resources",
-    "icon": "fab fa-stack-overflow",
-    "color": "text-orange-500"
+    "icon": "fas fa-database",
+    "color": "text-indigo-600"
+  },
+  {
+    "title": "Great Learning Academy",
+    "url": "https://www.mygreatlearning.com/academy?referrer_code=GLQTLGB4N4HHA",
+    "category": "Resources",
+    "icon": "fas fa-graduation-cap",
+    "color": "text-blue-600"
   },
   {
     "title": "MDN Web Docs",
@@ -89,5 +124,12 @@
     "category": "Resources",
     "icon": "fas fa-book",
     "color": "text-indigo-600"
+  },
+  {
+    "title": "Stack Overflow",
+    "url": "https://stackoverflow.com",
+    "category": "Resources",
+    "icon": "fab fa-stack-overflow",
+    "color": "text-orange-500"
   }
 ]
