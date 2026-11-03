@@ -43,7 +43,17 @@ jobs:
       - name: Build Astro site
         run: bun run build
         env:
-          GITHUB_ACTIONS: true
+          GITHUB_ACTIONS: 'true'
+          NODE_ENV: production
+          CI: 'true'
+
+      - name: Verify build output
+        run: |
+          if [ ! -f dist/index.html ]; then
+            echo "ERROR: dist/index.html was not generated"
+            exit 1
+          fi
+          echo "Astro build completed successfully"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -60,6 +70,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
