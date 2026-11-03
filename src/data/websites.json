@@ -7,11 +7,11 @@
     "color": "text-gray-800"
   },
   {
-    "title": "Python Tutorial",
-    "url": "https://s23010843.github.io/tutorial/python",
+    "title": "Java Tutorial",
+    "url": "https://bselearn.pages.dev/skills/programming/java",
     "category": "Our Tutorials",
-    "icon": "fab fa-python",
-    "color": "text-blue-600"
+    "icon": "fab fa-java",
+    "color": "text-red-500"
   },
   {
     "title": "Machine Learning Tutorial",
@@ -19,27 +19,6 @@
     "category": "Our Tutorials",
     "icon": "fas fa-brain",
     "color": "text-indigo-600"
-  },
-  {
-    "title": "JavaScript Tutorial",
-    "url": "https://s23010843.github.io/tutorial/javascript",
-    "category": "Our Tutorials",
-    "icon": "fab fa-js",
-    "color": "text-yellow-500"
-  },
-  {
-    "title": "HTML Tutorial",
-    "url": "https://s23010843.github.io/tutorial/html",
-    "category": "Our Tutorials",
-    "icon": "fab fa-html5",
-    "color": "text-orange-600"
-  },
-  {
-    "title": "CSS Tutorial",
-    "url": "https://s23010843.github.io/tutorial/css",
-    "category": "Our Tutorials",
-    "icon": "fab fa-css3-alt",
-    "color": "text-blue-500"
   },
   {
     "title": "Farm Market Prices",
@@ -56,6 +35,20 @@
     "color": "text-green-600"
   },
   {
+    "title": "Cropora",
+    "url": "https://cropora.netlify.app",
+    "category": "University Projects",
+    "icon": "fas fa-seedling",
+    "color": "text-green-600"
+  },
+  {
+    "title": "SmartAI Productivity Tool",
+    "url": "https://smartai-tool.netlify.app",
+    "category": "University Projects",
+    "icon": "fas fa-robot",
+    "color": "text-red-600"
+  },
+  {
     "title": "Essential Monitor",
     "url": "https://s23010843.github.io/essentials-monitor",
     "category": "University Projects",
@@ -67,20 +60,6 @@
     "url": "https://diabetes-project.netlify.app",
     "category": "University Projects",
     "icon": "fas fa-notes-medical",
-    "color": "text-red-600"
-  },
-  {
-    "title": "SmartAI Productivity Tool",
-    "url": "https://smartai-tool.netlify.app",
-    "category": "University Projects",
-    "icon": "fas fa-robot",
-    "color": "text-red-600"
-  },
-  {
-    "title": "Nice Market",
-    "url": "https://nicemarket.netlify.app",
-    "category": "University Projects",
-    "icon": "fas fa-shopping-cart",
     "color": "text-red-600"
   },
   {
