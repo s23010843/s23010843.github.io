@@ -17,6 +17,7 @@ concurrency:
 
 jobs:
   build:
+    name: Build Astro site
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +40,10 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Build Astro
+      - name: Build Astro site
         run: bun run build
+        env:
+          GITHUB_ACTIONS: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -48,6 +51,7 @@ jobs:
           path: ./dist
 
   deploy:
+    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
 
@@ -56,6 +60,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
