@@ -17,7 +17,6 @@ concurrency:
 
 jobs:
   build:
-    name: Build Astro site
     runs-on: ubuntu-latest
 
     steps:
@@ -29,11 +28,11 @@ jobs:
         with:
           bun-version: latest
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Build Astro
         run: bun run build
@@ -44,7 +43,6 @@ jobs:
           path: ./dist
 
   deploy:
-    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
 
@@ -53,6 +51,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
